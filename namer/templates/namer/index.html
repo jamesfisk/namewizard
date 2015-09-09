@@ -2,6 +2,28 @@
 
 <form action="{% url 'namer:index' %}" method="post">
     {% csrf_token %}
- <input type="text" name="year">
- <input type="submit" value="Submit">
+    <select name="year">
+        {% for year in years %}
+            {% if year == selected_year %}
+                <option value="{{ year }}" selected>{{ year }}</option>
+            {% else %}
+                <option value="{{ year }}">{{ year }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <select name="gender">
+        {% for gender in genders %}
+            {% if gender == selected_gender %}
+                <option value="{{ gender }}" selected>{{ gender }}</option>
+            {% else %}
+                <option value="{{ gender }}">{{ gender }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+
+    <input type="submit" value="Submit">
 </form>
+{{ name }}
+<script>
+</script>

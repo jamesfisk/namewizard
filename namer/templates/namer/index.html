@@ -1,29 +1,51 @@
-<h1>Hello</h1>
+{% load staticfiles %}
+<html>
 
-<form action="{% url 'namer:index' %}" method="post">
-    {% csrf_token %}
-    <select name="year">
-        {% for year in years %}
-            {% if year == selected_year %}
-                <option value="{{ year }}" selected>{{ year }}</option>
-            {% else %}
-                <option value="{{ year }}">{{ year }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-    <select name="gender">
-        {% for gender in genders %}
-            {% if gender == selected_gender %}
-                <option value="{{ gender }}" selected>{{ gender }}</option>
-            {% else %}
-                <option value="{{ gender }}">{{ gender }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
+<head>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+          rel="stylesheet" media="screen">
+    <style>
+        #wrapper {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1 class="text-center">Name Generator</h1>
+<img class="center-block" src="../static/namer/images/wizard.png">
+<br>
+<div id="wrapper">
+
+    <form action="{% url 'namer:index' %}" method="post" class="form-inline" role="form">
+        {% csrf_token %}
+        <label>Year:</label>
+        <select name="year" class="form-control" id="year_select">
+            {% for year in years %}
+                {% if year == selected_year %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label>  Gender:</label>
+        <select name="gender" class="form-control" id="gender_select">
+            {% for gender in genders %}
+                {% if gender == selected_gender %}
+                    <option value="{{ gender }}" selected>{{ gender }}</option>
+                {% else %}
+                    <option value="{{ gender }}">{{ gender }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
 
 
-    <input type="submit" value="Submit">
-</form>
-{{ name }}
-<script>
-</script>
+        <button type="submit" value="Submit" class="btn btn-default">Submit</button>
+    </form>
+    <h2>{{ name }}</h2>
+</div>
+<script src="{% static 'jquery.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

@@ -79,7 +79,7 @@ def index(request):
     year = request.POST.get('year', 0)
     gender = request.POST.get('gender', 'z')
     data = {'years': YEARS,
-            'selected_year': 2000,
+            'selected_year': 2014,
             'genders': GENDERS,
             'selected_gender': gender}
     if year != 0 and gender != 'z':

@@ -1,0 +1,7 @@
+<h1>Hello</h1>
+
+<form action="{% url 'namer:index' %}" method="post">
+    {% csrf_token %}
+ <input type="text" name="year">
+ <input type="submit" value="Submit">
+</form>

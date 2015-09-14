@@ -4,16 +4,50 @@
 <head>
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
           rel="stylesheet" media="screen">
+    <link href="{% static 'bootstrap/css/sticky-footer.css' %}"
+          rel="stylesheet" media="screen">
     <style>
         #wrapper {
             text-align: center;
         }
+
+        #name_text {
+            font-size: 70px;
+        }
+
+        #footer_text {
+            position: relative;
+            top: 2px;
+        }
+
+        .footer {
+            height: 20px;
+        }
+
+        body {
+            background-color: #F0F0F0;
+        }
+
+        h1 {
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        h3 {
+            padding-top: 0px;
+            margin-top: 0px;
+        }
+
+
     </style>
 </head>
 <body>
-<h1 class="text-center">Name Generator</h1>
-<img class="center-block" src="../static/namer/images/wizard.png">
+<h1 class="text-center">Lexalio</h1>
+
+<h3 class="text-center">The Naming Wizard</h3>
+<img class="center-block" src="../static/namer/images/wizard1.png">
 <br>
+
 <div id="wrapper">
 
     <form action="{% url 'namer:index' %}" method="post" class="form-inline" role="form">
@@ -28,7 +62,7 @@
                 {% endif %}
             {% endfor %}
         </select>
-        <label>  Gender:</label>
+        <label> Gender:</label>
         <select name="gender" class="form-control" id="gender_select">
             {% for gender in genders %}
                 {% if gender == selected_gender %}
@@ -40,9 +74,41 @@
         </select>
 
 
-        <button type="submit" value="Submit" class="btn btn-default">Submit</button>
+        <button type="submit" value="Submit" class="btn btn-default">Generate</button>
     </form>
-    <h2>{{ name }}</h2>
+
+
+    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Lexalio uses <a href="http://www.ssa.gov/oact/babynames/limits.html">Social Security baby name
+                        data</a> to randomly generate unique and original names. Magically creating totally new names is
+                        hard work, and sometimes Lexalio comes up with some real duds, so give him a few spins for best
+                        results. </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <h2 id="name_text">{{ name }}</h2>
+    <footer id="attrib" class="footer">
+        <div id="footer_text">
+            <div class="col-md-4 text-left left">
+                <small>© 2015 <a href="http://jfisk.com">James Fisk</a></small>
+            </div>
+            <div class="col-md-4 text-center center">
+                <small><a href="#"
+                          data-toggle="modal"
+                          data-target="#basicModal">About</a></small>
+            </div>
+            <div class="col-md-4 text-right">
+                <small>Art: <a href="http://codybubenik.com">Cody Bubenik</a></small>
+            </div>
+        </div>
+    </footer>
 </div>
 <script src="{% static 'jquery.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
